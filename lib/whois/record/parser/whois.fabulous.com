@@ -20,8 +20,11 @@ module Whois
       #   The Example parser for the list of all available methods.
       #
       class WhoisFabulousCom < Base
-
-        property_not_supported :status
+        property_supported :status do
+          content_for_scanner.scan(/Domain Status: ([^\n\r]+)/).map do |line|
+            line[0].strip
+          end.join(",")
+        end
 
         # The server is contacted only in case of a registered domain.
         property_supported :available? do
