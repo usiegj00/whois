@@ -23,7 +23,7 @@ module Whois
         property_supported :status do
           content_for_scanner.scan(/Domain Status: ([^\n\r]+)/).map do |line|
             line[0].strip
-          end.join(",")
+          end
         end
 
         # The server is contacted only in case of a registered domain.
